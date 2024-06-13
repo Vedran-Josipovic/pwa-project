@@ -25,16 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $image = "";
     }
 
-    
-
     $query = "INSERT INTO clanci (datum, naslov, sazetak, tekst, slika, kategorija, arhiva ) VALUES ('$today' ,'$title', '$summary', '$content', '$picture', '$category', '$display')";
     $result = mysqli_query($dbc, $query) or die('Error querying databese.');
     mysqli_close($dbc);
 }
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div>
                 <h1 class="category" id="category"><?php echo $category; ?></h1>
                 <h2 class="title"><?php echo $title; ?></h2>
-                <p>AUTOR:</p>
                 <p>OBJAVLJENO: <span id="published-date"></span></p>
             </div>
 
@@ -97,14 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </section>
 </main>
 
-
-
-
-
 <footer>
     <p>Vedran Josipović | vjosipovi@tvz.hr | 2024. | © štern.hr d.o.o</p>
 </footer>
-
 
 <script>
         document.addEventListener("DOMContentLoaded", function() {

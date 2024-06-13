@@ -10,7 +10,7 @@ define('UPLPATH', 'img/');
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kategorije</title>
+    <title>Tema dana</title>
 </head>
 <body>
     <header>
@@ -32,7 +32,6 @@ define('UPLPATH', 'img/');
             </nav>
         </div>
     </header>
-    
 
     <main>
         <?php
@@ -45,17 +44,17 @@ define('UPLPATH', 'img/');
         <section class="<?php echo ($kategorija == 'Igrice') ? 'section-igrice' : 'section-knjige'; ?>"></section>
             <?php echo ($kategorija == 'Igrice') ? 'IGRICE' : 'KNJIGE'; ?>
             <div class="articles">
-            <?php
-                $query = "SELECT * FROM clanci WHERE kategorija='$kategorija'";
-                $result = mysqli_query($dbc, $query);
-                while($row = mysqli_fetch_array($result)) {
-                    echo '<article>';
-                    echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
-                    echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
-                    echo '<p>' . $row['sazetak'] . '</p>';
-                    echo '</article>';
-                }
-            ?> 
+                <?php
+                    $query = "SELECT * FROM clanci WHERE kategorija='$kategorija'";
+                    $result = mysqli_query($dbc, $query);
+                    while($row = mysqli_fetch_array($result)) {
+                        echo '<article>';
+                        echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+                        echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
+                        echo '<p>' . $row['sazetak'] . '</p>';
+                        echo '</article>';
+                    }
+                ?> 
             </div>
     </section>
     </main>

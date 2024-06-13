@@ -32,46 +32,37 @@ define('UPLPATH', 'img/');
             </nav>
         </div>
     </header>
-    
-
     <main>
-
-
-    <div id="content">
-    <hr>
-    <div id='clanak'>
-    <?php
-        $id = $_GET['id'];
-        $kategorija = $_GET['kategorija'];
-        $query = "SELECT * FROM clanci where id=$id";
-        $result = mysqli_query($dbc, $query);
-        $row = mysqli_fetch_array($result);
-        echo "  <div id='section-naslov'>
-                    <a href='kategorija.php?kategorija=".$row['kategorija']."'>".$row['kategorija']." </a>
-                </div>
-                <div id=clanak-naslov'>
-                    <h2><b>".$row['naslov']."</b></h2>
-                </div>
-                <img src='". UPLPATH . $row['slika'] ."' alt=''>
-                <br><br>
-                <div id='tekst'>
-                    <b> 
-                        ".$row['sazetak']." 
-                    </b>
-                    <br><br>
-                    ".$row['tekst']."
-                    <br><br>
-                </div>
-                ";
-    ?> 
-    
-    </div>
-    </div>
-
-
-
+        <div id="content">
+            <hr>
+            <div id='clanak'>
+                <?php
+                    $id = $_GET['id'];
+                    $kategorija = $_GET['kategorija'];
+                    $query = "SELECT * FROM clanci where id=$id";
+                    $result = mysqli_query($dbc, $query);
+                    $row = mysqli_fetch_array($result);
+                    echo "  <div id='section-naslov'>
+                                <a href='kategorija.php?kategorija=".$row['kategorija']."'>".$row['kategorija']." </a>
+                            </div>
+                            <div id=clanak-naslov'>
+                                <h2><b>".$row['naslov']."</b></h2>
+                            </div>
+                            <img src='". UPLPATH . $row['slika'] ."' alt=''>
+                            <br><br>
+                            <div id='tekst'>
+                                <b> 
+                                    ".$row['sazetak']." 
+                                </b>
+                                <br><br>
+                                ".$row['tekst']."
+                                <br><br>
+                            </div>
+                            ";
+                ?> 
+            </div>
+        </div>
     </main>
-
     <footer>
         <p>Vedran Josipović | vjosipovi@tvz.hr | 2024. | © štern.hr d.o.o</p>
     </footer>

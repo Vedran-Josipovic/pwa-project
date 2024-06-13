@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Štern</title>
+    <title>Početna</title>
 </head>
 <body>
     <header>
@@ -33,41 +33,41 @@
         </div>
     </header>
     <main>
-    <section class="section-igrice">
-    <h2>IGRICE ></h2>
-    <div class="articles">
-    <?php
-        $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Igrice' LIMIT 3";
-        $result = mysqli_query($dbc, $query);
-        while($row = mysqli_fetch_array($result)) {
-            echo '<article>';
-            echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
-            echo '
-                <a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>
-                ';
-            echo '<p>' . $row['sazetak'] . '</p>';
-            echo '</article>';
-        }
-    ?> 
-    </div>
-</section>
+        <section class="section-igrice">
+            <h2>IGRICE ></h2>
+            <div class="articles">
+                <?php
+                    $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Igrice' LIMIT 3";
+                    $result = mysqli_query($dbc, $query);
+                    while($row = mysqli_fetch_array($result)) {
+                        echo '<article>';
+                        echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+                        echo '
+                            <a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>
+                            ';
+                        echo '<p>' . $row['sazetak'] . '</p>';
+                        echo '</article>';
+                    }
+                ?> 
+            </div>
+        </section>
 
-<section class="section-knjige">
-    <h2>KNJIGE ></h2>
-    <div class="articles">
-    <?php
-        $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Knjige' LIMIT 3";
-        $result = mysqli_query($dbc, $query);
-        while($row = mysqli_fetch_array($result)) {
-            echo '<article>';
-            echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
-            echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
-            echo '<p>' . $row['sazetak'] . '</p>';
-            echo '</article>';
-        }
-    ?> 
-    </div>
-</section>
+        <section class="section-knjige">
+            <h2>KNJIGE ></h2>
+            <div class="articles">
+                <?php
+                    $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Knjige' LIMIT 3";
+                    $result = mysqli_query($dbc, $query);
+                    while($row = mysqli_fetch_array($result)) {
+                        echo '<article>';
+                        echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+                        echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
+                        echo '<p>' . $row['sazetak'] . '</p>';
+                        echo '</article>';
+                    }
+                ?> 
+        </div>
+    </section>
     </main>
     <footer>
         <p>Vedran Josipović | vjosipovi@tvz.hr | 2024. | © štern.hr d.o.o</p>

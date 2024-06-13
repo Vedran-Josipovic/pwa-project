@@ -35,62 +35,62 @@ session_start();
     </header>
 
     <main>
-
         <div id="content">
-        <form method="post" class="form">
-            <div class="form-group">
-                <label for="username">Korisničko ime:</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Lozinka:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" name="submit">Prijavi se</button>
-            <br><br>
-            <label><a href="registracija.php">Registriraj se</a></label>
-        </form>
+            <form method="post" class="form">
+                <div class="form-group">
+                    <label for="username">Korisničko ime:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Lozinka:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" name="submit">Prijavi se</button>
+                <br><br>
+                <label><a href="registracija.php">Registriraj se</a></label>
+            </form>
+        </div>
         <div id="form">
-        <?php
-    if(isset($_POST["submit"])){
-        $korisnicko_ime = $_POST['username'];
-        $lozinka = $_POST['password'];
-        $hashed_password = password_hash($lozinka, CRYPT_BLOWFISH);
+            <?php
+                if(isset($_POST["submit"])){
+                    $korisnicko_ime = $_POST['username'];
+                    $lozinka = $_POST['password'];
+                    $hashed_password = password_hash($lozinka, CRYPT_BLOWFISH);
 
-        $sql="SELECT lozinka, razina FROM korisnik WHERE korisnicko_ime=?";
+                    $sql="SELECT lozinka, razina FROM korisnik WHERE korisnicko_ime=?";
 
-        $stmt=mysqli_stmt_init($dbc);
+                    $stmt=mysqli_stmt_init($dbc);
 
-        if (mysqli_stmt_prepare($stmt, $sql)){
-            mysqli_stmt_bind_param($stmt,'s',$korisnicko_ime);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_store_result($stmt);
-        }
+                    if (mysqli_stmt_prepare($stmt, $sql)){
+                        mysqli_stmt_bind_param($stmt,'s',$korisnicko_ime);
+                        mysqli_stmt_execute($stmt);
+                        mysqli_stmt_store_result($stmt);
+                    }
 
-        mysqli_stmt_bind_result($stmt, $loz, $levelKorisnika);
+                    mysqli_stmt_bind_result($stmt, $loz, $levelKorisnika);
 
-        if(mysqli_stmt_fetch($stmt)){
-            if(password_verify($lozinka,$loz)&&mysqli_stmt_num_rows($stmt) > 0) {
-                $_SESSION["uspjesnaPrijava"]=true;
-                if($levelKorisnika == 1) {
-                    $_SESSION["admin"]=true;
-                } else {
-                    $_SESSION["admin"]=false;
+                    if(mysqli_stmt_fetch($stmt)){
+                        if(password_verify($lozinka,$loz)&&mysqli_stmt_num_rows($stmt) > 0) {
+                            $_SESSION["uspjesnaPrijava"]=true;
+                            if($levelKorisnika == 1) {
+                                $_SESSION["admin"]=true;
+                            } else {
+                                $_SESSION["admin"]=false;
+                            }
+                            $_SESSION['username'] = $korisnicko_ime; 
+                            $_SESSION['level'] = $levelKorisnika;  
+                            echo "<p  class='poruka'>Prijava uspješna!</p><br>";
+                        } else {
+                            $_SESSION["uspjesnaPrijava"]=false;
+                            echo "<p class='poruka'>Unijeli ste pogrešno korisničko ime ili lozinku.</p>";
+                        }
+                    }else{
+                        $_SESSION["uspjesnaPrijava"]=false;
+                        echo "<p class='poruka'>Unses ne postoji</p>";
+                    };
                 }
-                $_SESSION['username'] = $korisnicko_ime; 
-                $_SESSION['level'] = $levelKorisnika;  
-                echo "<p  class='poruka'>Prijava uspješna!</p><br>";
-            } else {
-                $_SESSION["uspjesnaPrijava"]=false;
-                echo "<p class='poruka'>Unijeli ste pogrešno korisničko ime ili lozinku.</p>";
-            }
-        }else{
-            $_SESSION["uspjesnaPrijava"]=false;
-            echo "<p class='poruka'>Unijeli ste korisničko ime koje ne postoji, molimo Vas da se registrirate.</p>";
-        };
-    }
-    ?>  
-    </div>
+            ?>  
+        </div>
 
     </main>
 
