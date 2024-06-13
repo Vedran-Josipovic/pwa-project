@@ -1,3 +1,8 @@
+<?php
+    include 'connect.php';
+    define('UPLPATH', 'img/');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +22,8 @@
             <nav class>
                 <ul>
                     <li><a href="index.php">Početna</a></li>
-                    <li><a href="igrice.php">Igrice</a></li>
-                    <li><a href="knjige.php">Knjige</a></li>
+                    <li><a href="kategorija.php?kategorija=Igrice">Igrice</a></li>
+                    <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
                     <li><a href="administrator.php">Administracija</a></li>
                     <li><a href="unos.php">Unos</a></li>
                 </ul>
@@ -26,46 +31,41 @@
         </div>
     </header>
     <main>
-        <section class="section-igrice">
-            <h2>IGRICE ></h2>
-            <div class="articles">
-            <article>
-                <img src="img/witcher.jpg" alt="The Witcher 3: Wild Hunt">
-                <h3>The Witcher 3: Wild Hunt</h3>
-                <p>Open-world action role-playing game</p>
-            </article>
-            <article>
-                <img src="img/rdr2.jpg" alt="Red Dead Redemption 2">
-                <h3>Red Dead Redemption 2</h3>
-                <p>Western-themed action-adventure game</p>
-            </article>
-            <article>
-                <img src="img/overwatch.jpg" alt="Overwatch">
-                <h3>Overwatch</h3>
-                <p>Team-based first-person shooter game</p>
-            </article>
-            </div>
-        </section>
-        <section class="section-knjige">
-            <h2>KNJIGE ></h2>
-            <div class="articles">
-            <article>
-                <img src="img/harry-potter.jpg" alt="Harry Potter and the Philosopher's Stone">
-                <h3>Harry Potter and the Philosopher's Stone</h3>
-                <p>Fantasy novel by J.K. Rowling</p>
-            </article>
-            <article>
-                <img src="img/lotr.jpg" alt="The Lord of the Rings">
-                <h3>The Lord of the Rings</h3>
-                <p>Epic high fantasy novel by J.R.R. Tolkien</p>
-            </article>
-            <article>
-                <img src="img/1984.jpg" alt="1984">
-                <h3>1984</h3>
-                <p>Dystopian novel by George Orwell</p>
-            </article>
-            </div>
-        </section>
+    <section class="section-igrice">
+    <h2>IGRICE ></h2>
+    <div class="articles">
+    <?php
+        $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Igrice' LIMIT 3";
+        $result = mysqli_query($dbc, $query);
+        while($row = mysqli_fetch_array($result)) {
+            echo '<article>';
+            echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+            echo '
+                <a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>
+                ';
+            echo '<p>' . $row['sazetak'] . '</p>';
+            echo '</article>';
+        }
+    ?> 
+    </div>
+</section>
+
+<section class="section-knjige">
+    <h2>KNJIGE ></h2>
+    <div class="articles">
+    <?php
+        $query = "SELECT * FROM clanci WHERE arhiva=1 AND kategorija='Knjige' LIMIT 3";
+        $result = mysqli_query($dbc, $query);
+        while($row = mysqli_fetch_array($result)) {
+            echo '<article>';
+            echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+            echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
+            echo '<p>' . $row['sazetak'] . '</p>';
+            echo '</article>';
+        }
+    ?> 
+    </div>
+</section>
     </main>
     <footer>
         <p>Vedran Josipović | vjosipovi@tvz.hr | 2024. | © štern.hr d.o.o</p>

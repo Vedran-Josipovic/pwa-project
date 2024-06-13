@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'connect.php';
 define('UPLPATH', 'img/');
 ?>
@@ -10,7 +10,7 @@ define('UPLPATH', 'img/');
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Članak</title>
+    <title>Igrice</title>
 </head>
 <body>
     <header>
@@ -33,41 +33,29 @@ define('UPLPATH', 'img/');
     
 
     <main>
-
-
-    <div id="content">
-    <hr>
-    <div id='clanak'>
-    <?php
-        $id = $_GET['id'];
-        $kategorija = $_GET['kategorija'];
-        $query = "SELECT * FROM clanci where id=$id";
-        $result = mysqli_query($dbc, $query);
-        $row = mysqli_fetch_array($result);
-        echo "  <div id='section-naslov'>
-                    <a href='kategorija.php?kategorija=".$row['kategorija']."'>".$row['kategorija']." </a>
-                </div>
-                <div id=clanak-naslov'>
-                    <h2><b>".$row['naslov']."</b></h2>
-                </div>
-                <img src='". UPLPATH . $row['slika'] ."' alt=''>
-                <br><br>
-                <div id='tekst'>
-                    <b> 
-                        ".$row['sazetak']." 
-                    </b>
-                    <br><br>
-                    ".$row['tekst']."
-                    <br><br>
-                </div>
-                ";
-    ?> 
-    
-    </div>
-    </div>
-
-
-
+        <?php
+            $kategorija = $_GET['kategorija'];
+            echo 
+                '<div>
+                    <a href="kategorija.php?kategorija=' . $kategorija . '">' . $kategorija . '</a>
+                </div>';
+            ?>
+        <section class="<?php echo ($kategorija == 'Igrice') ? 'section-igrice' : 'section-knjige'; ?>"></section>
+            <?php echo ($kategorija == 'Igrice') ? 'IGRICE' : 'KNJIGE'; ?>
+            <div class="articles">
+            <?php
+                $query = "SELECT * FROM clanci WHERE kategorija='$kategorija'";
+                $result = mysqli_query($dbc, $query);
+                while($row = mysqli_fetch_array($result)) {
+                    echo '<article>';
+                    echo '<img src="img/' . $row['slika'] . '" alt="' . $row['naslov'] . '">';
+                    echo '<a href="clanak.php?id='.$row['id'].'&kategorija='.$row['kategorija'].'"><h3>'.$row['naslov'].'</h3></a>';
+                    echo '<p>' . $row['sazetak'] . '</p>';
+                    echo '</article>';
+                }
+            ?> 
+            </div>
+    </section>
     </main>
 
     <footer>

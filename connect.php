@@ -3,11 +3,15 @@ header('Content-Type: text/html; charset=utf-8');
 
 $servername = "localhost";
 $username = "root";
-$password = "";
-$basename = "projekt";
+$password = "abba";
+$dbname = "projekt_pwa";
+$port = 3307;
 
-// Kreiranje konekcije
-$dbc = mysqli_connect($servername, $username, $password, $basename) or die('Greška pri spajanju na MySQL server.'.mysqli_error($dbc));
+$dbc = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+if (!$dbc) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 mysqli_set_charset($dbc, "utf8");
 
 ?>

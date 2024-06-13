@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // include 'connect.php';
+    include 'connect.php';
 
     $picture = $_FILES['picture']['name'];
     $title=$_POST['title'];
@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category=$_POST['category'];
     $display = isset($_POST['display']) ? 1 : 0;
     $picture = "";
+    $today = date("d-m-Y");
 
     if (isset($_FILES["picture"]) && $_FILES["picture"]["error"] == UPLOAD_ERR_OK) {
         $image_name = uniqid() . '_' . basename($_FILES["picture"]["name"]);
@@ -26,11 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
 
-    // $query = "INSERT INTO projektdbs (title, summary, content, category, picture, display ) VALUES ('$title', '$summary', '$content', '$category', '$picture', '$display')";
-    // $result = mysqli_query($dbc, $query) or die('Error querying databese.');
-    // mysqli_close($dbc);
+    $query = "INSERT INTO clanci (datum, naslov, sazetak, tekst, slika, kategorija, arhiva ) VALUES ('$today' ,'$title', '$summary', '$content', '$picture', '$category', '$display')";
+    $result = mysqli_query($dbc, $query) or die('Error querying databese.');
+    mysqli_close($dbc);
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h1>Štern časopis</h1>
             <nav class>
                 <ul>
-                <li><a href="index.php">Početna</a></li>
-                <li><a href="igrice.php">Igrice</a></li>
-                <li><a href="knjige.php">Knjige</a></li>
-                <li><a href="administrator.php">Administracija</a></li>
-                <li><a href="unos.php">Unos</a></li>
+                    <li><a href="index.php">Početna</a></li>
+                    <li><a href="kategorija.php?kategorija=Igrice">Igrice</a></li>
+                    <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
+                    <li><a href="administrator.php">Administracija</a></li>
+                    <li><a href="unos.php">Unos</a></li>
                 </ul>
             </nav>
         </div>

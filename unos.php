@@ -16,18 +16,14 @@
             <nav class>
                 <ul>
                     <li><a href="index.php">Početna</a></li>
-                    <li><a href="igrice.php">Igrice</a></li>
-                    <li><a href="knjige.php">Knjige</a></li>
+                    <li><a href="kategorija.php?kategorija=Igrice">Igrice</a></li>
+                    <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
                     <li><a href="administrator.php">Administracija</a></li>
                     <li><a href="unos.php">Unos</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
-
-     
-
 
 
     <main>
