@@ -26,6 +26,8 @@
                     <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
                     <li><a href="administrator.php">Administracija</a></li>
                     <li><a href="unos.php">Unos</a></li>
+                    <li><a href="registracija.php">Registracija</a></li>
+                    <li><a href="prijava.php">Prijava</a></li>
                 </ul>
             </nav>
         </div>

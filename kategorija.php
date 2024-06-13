@@ -10,7 +10,7 @@ define('UPLPATH', 'img/');
     <link rel="stylesheet" type="text/css" href="style.css"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Igrice</title>
+    <title>Kategorije</title>
 </head>
 <body>
     <header>
@@ -26,6 +26,8 @@ define('UPLPATH', 'img/');
                     <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
                     <li><a href="administrator.php">Administracija</a></li>
                     <li><a href="unos.php">Unos</a></li>
+                    <li><a href="registracija.php">Registracija</a></li>
+                    <li><a href="prijava.php">Prijava</a></li>
                 </ul>
             </nav>
         </div>

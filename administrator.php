@@ -32,6 +32,8 @@ $level = isset($_SESSION['level']) ? $_SESSION['level'] : 0;
                     <li><a href="kategorija.php?kategorija=Knjige">Knjige</a></li>
                     <li><a href="administrator.php">Administracija</a></li>
                     <li><a href="unos.php">Unos</a></li>
+                    <li><a href="registracija.php">Registracija</a></li>
+                    <li><a href="prijava.php">Prijava</a></li>
                 </ul>
             </nav>
         </div>
@@ -90,9 +92,9 @@ $level = isset($_SESSION['level']) ? $_SESSION['level'] : 0;
                     <label>Spremanje - Arhiviranje: 
                     <div class="form-field">';
                         if($row['arhiva'] == 0) {
-                            echo '<input type="checkbox" name="archive" id="archive"/> Arhiviraj?';
+                            echo '<input type="checkbox" name="archive" id="archive"/> Želiš li prikazati članak na stranici?';
                         } else {
-                            echo '<input type="checkbox" name="archive" id="archive" checked="true"/> Arhiviraj?';
+                            echo '<input type="checkbox" name="archive" id="archive" checked="true"/> Želiš li prikazati članak na stranici?';
                         }
             echo '  </div>
                     </label>
@@ -111,7 +113,7 @@ $level = isset($_SESSION['level']) ? $_SESSION['level'] : 0;
             } else if (isset($_SESSION['username']) && $_SESSION['level'] == 0) {
                 echo '<p class="poruka">Bok ' . $_SESSION['username'] . '! Uspješno ste prijavljeni, ali niste administrator.</p>';
             } else if ($uspjesnaPrijava == false) {
-                header("Location:   Prijava.php");
+                header("Location: prijava.php");
                 exit;
             }
     
